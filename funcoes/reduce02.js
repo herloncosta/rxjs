@@ -2,8 +2,7 @@ Array.prototype.meuReduce = function (fn, inicial) {
 	let acc = inicial !== undefined ? inicial : this[0];
 
 	for (let i = 0; i < this.length; i++) {
-		let item = fn(acc, this[i], i, this);
-		acc = item;
+		acc = fn(acc, this[i], i, this);
 	}
 
 	return acc;
