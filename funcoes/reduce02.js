@@ -1,15 +1,16 @@
-// Implementação do método reduce
-Array.prototype.meuReduce = function (fn, valorInicial) {
-    for (let i = 0; i < this.length; i++) {
-        valorInicial += fn(valorInicial, this[i]);
-    }
+Array.prototype.meuReduce = function (fn, inicial) {
+	let acc = inicial !== undefined ? inicial : this[0];
 
-    return valorInicial;
+	for (let i = 0; i < this.length; i++) {
+		let item = fn(acc, this[i], i, this);
+		acc = item;
+	}
+
+	return acc;
 };
 
+let valores = [45, 55, 100];
 const somar = (acc, item) => acc + item;
 
-const valores = [34, 65, 78];
-console.log(valores.meuReduce(somar, 0));
-
-// console.log(valores.reduce(somar));
+const resultado = valores.meuReduce(somar, 0);
+console.log(resultado);
