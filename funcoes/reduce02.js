@@ -1,5 +1,5 @@
 Array.prototype.meuReduce = function (fn, inicial) {
-	let acc = inicial !== undefined ? inicial : this[0];
+	let acc = inicial !== undefined ? inicial : null;
 
 	for (let i = 0; i < this.length; i++) {
 		acc = fn(acc, this[i], i, this);
@@ -11,5 +11,5 @@ Array.prototype.meuReduce = function (fn, inicial) {
 let valores = [45, 55, 100];
 const somar = (acc, item) => acc + item;
 
-const resultado = valores.meuReduce(somar, 0);
+const resultado = valores.meuReduce(somar);
 console.log(resultado);
