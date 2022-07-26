@@ -22,7 +22,13 @@ function lerArquivo(caminho) {
     });
 }
 
+function filtrarExtensao(array, extensao) {
+    const itensFiltrados = array.filter((item) => item.endsWith(extensao));
+    return itensFiltrados;
+}
+
 module.exports = {
     lerArquivo,
     lerDiretorio,
+    filtrarExtensao,
 };
