@@ -1,11 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
-function lerDiretorio(caminho) {
+function lerDiretorio(caminhoPasta) {
     return new Promise((resolve, reject) => {
         try {
-            let arquivos = fs.readdirSync(caminho);
-            arquivos = arquivos.map((arquivo) => path.join(__dirname, arquivo));
+            let arquivos = fs.readdirSync(caminhoPasta);
+            arquivos = arquivos.map((caminhoArquivo) =>
+                path.join(caminhoPasta, caminhoArquivo)
+            );
             resolve(arquivos);
         } catch (err) {
             reject(err);
@@ -13,22 +15,46 @@ function lerDiretorio(caminho) {
     });
 }
 
+function filtrarExtensao(array, extensao) {
+    return array.filter((item) => item.endsWith(extensao));
+}
+
 function lerArquivo(caminho) {
-    return new Promise((res, rej) => {
-        fs.readFile(caminho, "utf8", (err, data) => {
-            if (err) rej(err);
-            res(data);
-        });
+    return new Promise((resolve, reject) => {
+        try {
+            const conteudo = fs.readFileSync(caminho, { encoding: "utf-8" });
+            resolve(conteudo.toString());
+        } catch (e) {
+            reject(e);
+        }
     });
 }
 
-function filtrarExtensao(array, extensao) {
-    const itensFiltrados = array.filter((item) => item.endsWith(extensao));
-    return itensFiltrados;
+function lerArquivos(arrCaminhos) {
+    return Promise.all(arrCaminhos.map((caminho) => lerArquivo(caminho)));
+}
+
+function removerSeVazio(array) {
+    return array.filter((el) => el.trim());
+}
+
+function removerSeIncluir(texto, array) {
+    return array.filter((item) => !item.includes(texto));
+}
+
+function removerSeApenasNumero(array) {
+    return array.filter((item) => {
+        let numero = !parseInt(item.trim()); // retorna true se não for number
+        return numero != 0 && !!numero; // retona true se for diferente de 0 e se não for NaN
+    });
 }
 
 module.exports = {
     lerArquivo,
+    lerArquivos,
     lerDiretorio,
     filtrarExtensao,
+    removerSeVazio,
+    removerSeIncluir,
+    removerSeApenasNumero,
 };
