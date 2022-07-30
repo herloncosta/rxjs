@@ -25,13 +25,14 @@ const simbolos = [
 ];
 
 const mesclarConteudos = (conteudos) => conteudos.join(" ");
-const separarPorPalavras = (conteudos) => conteudos.split("\n");
+const separarPorLinhas = (todoConteudo) => todoConteudo.split("\n");
+const separarPorPalavras = (todoConteudo) => todoConteudo.split(" ");
 
 fn.lerDiretorio(caminhoPasta)
     .then((caminhos) => fn.filtrarExtensao(caminhos, ".srt"))
     .then((listaCaminhos) => fn.lerArquivos(listaCaminhos))
     .then(mesclarConteudos)
-    .then(separarPorPalavras)
+    .then(separarPorLinhas)
     .then(fn.removerSeVazio)
     .then((linhas) => fn.removerSeIncluir("-->", linhas))
     .then(fn.removerSeApenasNumero)
