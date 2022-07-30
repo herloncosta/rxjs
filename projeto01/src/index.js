@@ -3,7 +3,7 @@ const path = require("path");
 
 const caminhoPasta = path.join(__dirname, "legendas");
 
-const simbolos = ["♪", "_", "</i>", "[", "]", "(", ")", " ", "", "'", ":", "♪"];
+const simbolos = ["♪", "_", "</i>", "(", ")", " ", "", ":", "♪"];
 
 fn.lerDiretorio(caminhoPasta)
     .then((caminhos) => fn.filtrarExtensao(caminhos, ".srt"))
@@ -23,4 +23,10 @@ fn.lerDiretorio(caminhoPasta)
     .then((palavras) => fn.removerSeIncluir("<i>", palavras))
     .then((palavras) => fn.removerSeIncluir(",", palavras))
     .then((palavras) => fn.removerSeIncluir(".", palavras))
+    .then((palavras) => fn.removerSeIncluir("[", palavras))
+    .then((palavras) => fn.removerSeIncluir("]", palavras))
+    .then((palavras) => fn.removerSeIncluir('"', palavras))
+    .then((palavras) => fn.removerSeIncluir("!", palavras))
+    .then((palavras) => fn.removerSeIncluir("'", palavras))
+    .then(fn.agruparElementos)
     .then(console.log);
