@@ -49,6 +49,16 @@ function removerSeApenasNumero(array) {
     });
 }
 
+function removerSimbolos(simbolos, array) {
+    return array.map((item) => {
+        let textoSemSimbolos = item;
+        simbolos.forEach((simbolo) => {
+            return (textoSemSimbolos = item.split(simbolo).join(" "));
+        });
+        return textoSemSimbolos;
+    });
+}
+
 module.exports = {
     lerArquivo,
     lerArquivos,
@@ -57,4 +67,5 @@ module.exports = {
     removerSeVazio,
     removerSeIncluir,
     removerSeApenasNumero,
+    removerSimbolos,
 };
