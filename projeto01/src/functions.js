@@ -22,7 +22,7 @@ function filtrarExtensao(array, extensao) {
 function lerArquivo(caminho) {
     return new Promise((resolve, reject) => {
         try {
-            const conteudo = fs.readFileSync(caminho, { encoding: "utf-8" });
+            const conteudo = fs.readFileSync(caminho);
             resolve(conteudo.toString());
         } catch (e) {
             reject(e);
@@ -59,6 +59,16 @@ function removerSimbolos(simbolos, array) {
     });
 }
 
+function mesclarConteudos(conteudos) {
+    return conteudos.join(" ");
+}
+
+function separarTextoPor(simbolo) {
+    return function (texto) {
+        return texto.split(simbolo);
+    };
+}
+
 module.exports = {
     lerArquivo,
     lerArquivos,
@@ -68,4 +78,6 @@ module.exports = {
     removerSeIncluir,
     removerSeApenasNumero,
     removerSimbolos,
+    mesclarConteudos,
+    separarTextoPor,
 };
