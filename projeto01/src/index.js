@@ -29,4 +29,5 @@ fn.lerDiretorio(caminhoPasta)
     .then((palavras) => fn.removerSeIncluir("!", palavras))
     .then((palavras) => fn.removerSeIncluir("'", palavras))
     .then(fn.agruparElementos)
+    .then(fn.ordenarPorAtribNumerico("qtde", "desc"))
     .then(console.log);

@@ -4,11 +4,11 @@ const path = require("path");
 function lerDiretorio(caminhoPasta) {
     return new Promise((resolve, reject) => {
         try {
-            let arquivos = fs.readdirSync(caminhoPasta);
-            arquivos = arquivos.map((caminhoArquivo) =>
+            const arquivos = fs.readdirSync(caminhoPasta);
+            const arquivosCompletos = arquivos.map((caminhoArquivo) =>
                 path.join(caminhoPasta, caminhoArquivo)
             );
-            resolve(arquivos);
+            resolve(arquivosCompletos);
         } catch (err) {
             reject(err);
         }
@@ -51,11 +51,9 @@ function removerSeApenasNumero(array) {
 
 function removerSimbolos(simbolos, array) {
     return array.map((item) => {
-        let textoSemSimbolos = item;
-        simbolos.forEach((simbolo) => {
-            return (textoSemSimbolos = item.split(simbolo).join(" "));
-        });
-        return textoSemSimbolos;
+        return simbolos.reduce((acc, simbolo) => {
+            return acc.split(simbolo).join(" ");
+        }, item);
     });
 }
 
@@ -80,6 +78,14 @@ function agruparElementos(palavras) {
     );
 }
 
+function ordenarPorAtribNumerico(attr, ordem = "asc") {
+    return function (array) {
+        const desc = (o1, o2) => o2[attr] - o1[attr];
+        const asc = (o1, o2) => o1[attr] - o2[attr];
+        return array.sort(ordem === "asc" ? asc : desc);
+    };
+}
+
 module.exports = {
     lerArquivo,
     lerArquivos,
@@ -92,4 +98,5 @@ module.exports = {
     mesclarConteudos,
     separarTextoPor,
     agruparElementos,
+    ordenarPorAtribNumerico,
 };
