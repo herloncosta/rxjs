@@ -3,7 +3,26 @@ const path = require("path");
 
 const caminhoPasta = path.join(__dirname, "legendas");
 
-const simbolos = ["♪", "_", "</i>", "(", ")", " ", "", ":", "♪"];
+const simbolos = [
+    "♪",
+    "_",
+    "<i>",
+    "</i>",
+    "(",
+    ")",
+    " ",
+    ":",
+    "♪",
+    "?",
+    "!",
+    "'",
+    "-",
+    ",",
+    ".",
+    "[",
+    "]",
+    '"',
+];
 
 fn.lerDiretorio(caminhoPasta)
     .then((caminhos) => fn.filtrarExtensao(caminhos, ".srt"))
@@ -18,16 +37,6 @@ fn.lerDiretorio(caminhoPasta)
     .then(fn.separarTextoPor(" "))
     .then(fn.removerSeVazio)
     .then((palavras) => fn.removerSeIncluir("\r", palavras))
-    .then((palavras) => fn.removerSeIncluir("?", palavras))
-    .then((palavras) => fn.removerSeIncluir("-", palavras))
-    .then((palavras) => fn.removerSeIncluir("<i>", palavras))
-    .then((palavras) => fn.removerSeIncluir(",", palavras))
-    .then((palavras) => fn.removerSeIncluir(".", palavras))
-    .then((palavras) => fn.removerSeIncluir("[", palavras))
-    .then((palavras) => fn.removerSeIncluir("]", palavras))
-    .then((palavras) => fn.removerSeIncluir('"', palavras))
-    .then((palavras) => fn.removerSeIncluir("!", palavras))
-    .then((palavras) => fn.removerSeIncluir("'", palavras))
     .then(fn.agruparElementos)
     .then(fn.ordenarPorAtribNumerico("qtde", "desc"))
     .then(console.log);

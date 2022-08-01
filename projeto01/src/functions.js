@@ -4,11 +4,12 @@ const path = require("path");
 function lerDiretorio(caminhoPasta) {
     return new Promise((resolve, reject) => {
         try {
-            const arquivos = fs.readdirSync(caminhoPasta);
-            const arquivosCompletos = arquivos.map((caminhoArquivo) =>
-                path.join(caminhoPasta, caminhoArquivo)
-            );
-            resolve(arquivosCompletos);
+            const arquivos = fs
+                .readdirSync(caminhoPasta)
+                .map((caminhoArquivo) =>
+                    path.join(caminhoPasta, caminhoArquivo)
+                );
+            resolve(arquivos);
         } catch (err) {
             reject(err);
         }
@@ -16,7 +17,7 @@ function lerDiretorio(caminhoPasta) {
 }
 
 function filtrarExtensao(array, extensao) {
-    return array.filter((item) => item.endsWith(extensao));
+    return [...array].filter((item) => item.endsWith(extensao));
 }
 
 function lerArquivo(caminho) {
