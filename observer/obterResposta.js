@@ -1,6 +1,6 @@
 import { createInterface } from "node:readline";
 
-export function obterResposta(pergunta) {
+export const obterResposta = (pergunta) => {
 	const rl = createInterface({
 		input: process.stdin,
 		output: process.stdout,
@@ -12,4 +12,4 @@ export function obterResposta(pergunta) {
 			rl.close();
 		});
 	});
-}
+};
