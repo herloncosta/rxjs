@@ -12,3 +12,6 @@ O Observer registra no Subject que tem interesse no Event;
 O Subject passa a detectar quando o evento ocorre e notifica o Observer.
 
     detecta Event < Subject > notifica Observer
+
+Marble Diagram Anatomy
+<img src="./marble-diagram-anatomy.svg">
