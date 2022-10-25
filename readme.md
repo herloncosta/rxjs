@@ -14,4 +14,5 @@ O Subject passa a detectar quando o evento ocorre e notifica o Observer.
     detecta Event < Subject > notifica Observer
 
 Marble Diagram Anatomy
+<br />
 <img src="./marble-diagram-anatomy.svg">
